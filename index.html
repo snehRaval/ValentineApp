@@ -110,10 +110,39 @@ button {
         opacity: 0;
     }
 }
+/* Spotify mini widget */
+/* Spotify widget fixed at bottom of card */
+.spotify-widget {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    right: 20px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.35);
+}
+
+.spotify-title {
+    font-size: 12px;
+    color: #8a003a;
+    opacity: 0.85;
+    display: block;
+    margin-bottom: 6px;
+}
+
+#spotifyPlayer iframe {
+    width: 100%;
+    height: 80px;
+    border-radius: 14px;
+    border: none;
+}
+
+
 </style>
 </head>
 
 <body>
+
+
 
 <div class="card">
     <h1 id="typing"></h1>
@@ -123,7 +152,14 @@ button {
         <button class="yes" id="yes">Yes 💕</button>
         <button class="no" id="no">No 😝</button>
     </div>
+    <div id="spotifyWidget">
+    <div class="spotify-label">🎵 Love vibes</div>
+    <div id="spotifyPlayer"></div>
 </div>
+</div>
+
+
+
 
 <script>
 /* ---------- SHAREABLE NAME ---------- */
@@ -211,7 +247,7 @@ document.getElementById("yes").onclick = () => {
                 You just made my world brighter 🌹
             </p>
             <p style="font-size:16px;opacity:0.9;">
-                Happy Valentine beautiful 💖
+                Happy Valentine ${name} 💖
             </p>
           
         </div>
@@ -242,6 +278,36 @@ setInterval(() => {
     setTimeout(() => h.remove(), 6000);
 }, 600);
 </script>
+
+<script>
+const playlists = [
+  "37i9dQZF1DX4pAtJteyweQ",
+  "5VInfryS0G9ZDrjJZGAnWl",
+  "3jITKDEiHyS22uNjIBCfi2",
+  "0yBoo0bRoygrOMeFTo1vIK",
+  "5FlOWjWqofAEepXQW4DOTmI",
+  "7vBkII69yc6liOLEdFyK1Q"
+];
+
+function loadRandomSpotifyPlaylist() {
+    const randomId = playlists[Math.floor(Math.random() * playlists.length)];
+    const iframe = document.createElement("iframe");
+
+    iframe.src = `https://open.spotify.com/embed/playlist/${randomId}`;
+    iframe.width = "320";
+    iframe.height = "380";
+    iframe.frameBorder = "0";
+    iframe.allow = "encrypted-media";
+    iframe.style.borderRadius = "16px";
+    iframe.style.boxShadow = "0 15px 40px rgba(0,0,0,0.25)";
+
+    document.getElementById("spotifyPlayer").appendChild(iframe);
+}
+
+/* Load on page start */
+window.addEventListener("load", loadRandomSpotifyPlaylist);
+</script>
+
 
 </body>
 </html>
