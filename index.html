@@ -186,9 +186,9 @@ button {
                 You just made my world brighter 🌹
             </p>
           
-            <p style="font-size:16px;opacity:0.9;">
-                Happy Valentine ${name} 💖
-            </p>
+          <p id="loveTitle" style="text-align:center;margin-bottom:20px;">
+ Happy Valentine ${name} 💖
+ </p>
           
           
         <p id="letterText" style="
@@ -278,6 +278,10 @@ document.getElementById("yes").onclick = () => {
     const screen = document.getElementById("loveScreen");
     screen.style.display = "flex";
 
+ // 🔥 Inject name safely
+    document.getElementById("loveTitle").textContent =
+        name ? ` Happy Valentine ${name} 💖` : " Happy Valentine 💖";
+        
     typeLoveLetter();
 };
 
