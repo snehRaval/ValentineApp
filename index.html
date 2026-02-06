@@ -135,6 +135,9 @@ button {
     border-radius: 14px;
     border: none;
 }
+#mainCard, #loveScreen {
+    transition: opacity 0.6s ease;
+}
 
 
 </style>
@@ -144,7 +147,7 @@ button {
 
 
 
-<div class="card">
+<div id="mainCard" class="card">
     <h1 id="typing"></h1>
     <div id="romanticText"></div>
 
@@ -158,6 +161,43 @@ button {
 </div>
 </div>
 
+<div id="loveScreen" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle,#ff4d6d,#b1004b);
+    align-items:center;
+    justify-content:center;
+    color:white;
+    padding:30px;
+    overflow:auto;
+">
+    <div style="
+        max-width:600px;
+        background:rgba(255,255,255,0.15);
+        backdrop-filter:blur(20px);
+        border-radius:24px;
+        padding:30px;
+        box-shadow:0 20px 50px rgba(0,0,0,0.3);
+    ">
+  
+         <h1 style="font-size:42px;">YAYYYYYYYYY 💘</h1>
+            <p style="font-size:20px;margin:15px 0;">
+                You just made my world brighter 🌹
+            </p>
+          
+            <p style="font-size:16px;opacity:0.9;">
+                Happy Valentine ${name} 💖
+            </p>
+          
+          
+        <p id="letterText" style="
+            font-size:18px;
+            line-height:1.7;
+            white-space:pre-line;
+        "></p>
+    </div>
+</div>
 
 
 
@@ -165,9 +205,9 @@ button {
 /* ---------- SHAREABLE NAME ---------- */
 const params = new URLSearchParams(window.location.search);
 const name = params.get("name");
-const question = name
-    ? `${name}, will you be my Valentine? 💖`
-    : "Will you be my Valentine? 💖";
+const question = "Will you be my Valentine? 💖"
+//    ? `${name}, will you be my Valentine? 💖`
+//    : "Will you be my Valentine? 💖";
 
 /* ---------- TYPING ANIMATION ---------- */
 const typing = document.getElementById("typing");
@@ -229,30 +269,18 @@ noBtn.addEventListener("touchstart", e => {
 
 /* ---------- YES ACTION ---------- */
 document.getElementById("yes").onclick = () => {
-    celebrate();
+   // celebrate();
 
-    document.body.innerHTML = `
-    <div style="
-        height:100vh;
-        background:radial-gradient(circle,#ff4d6d,#b1004b);
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        color:white;
-        text-align:center;
-        padding:20px;">
-        <div>
-            <h1 style="font-size:42px;">YAYYY 💘</h1>
-            <p style="font-size:20px;margin:15px 0;">
-                You just made my world brighter 🌹
-            </p>
-            <p style="font-size:16px;opacity:0.9;">
-                Happy Valentine ${name} 💖
-            </p>
-          
-        </div>
-    </div>`;
+    // Hide card, but DO NOT remove it
+    document.getElementById("mainCard").style.display = "none";
+
+    // Show love letter screen
+    const screen = document.getElementById("loveScreen");
+    screen.style.display = "flex";
+
+    typeLoveLetter();
 };
+
 
 /* ---------- CONFETTI ---------- */
 function celebrate() {
